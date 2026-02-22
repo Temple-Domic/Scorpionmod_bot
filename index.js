@@ -4,20 +4,20 @@ const qrcode = require("qrcode-terminal");
 const fs = require("fs");
 const chalk = require("chalk");
 
-// Owner number
-const OWNER_NUMBER = "233278104843"; // Replace with your number
+// Your WhatsApp number (owner) – fixed for Ghana
+const OWNER_NUMBER = "233278104843"; // your Ghana number
 
 // Create sessions folder if not exist
 if (!fs.existsSync('./sessions')) fs.mkdirSync('./sessions');
 
-// Approved pairing codes
+// Pending and approved pairs
 let pendingPairs = {};
 let approvedPairs = [];
 
 // Active sockets
 let activeSockets = {};
 
-// Start WhatsApp session for a number
+// Start WhatsApp session
 async function startSession(phoneNumber) {
     const { state, saveCreds } = await useMultiFileAuthState(`./sessions/${phoneNumber}`);
     const { version } = await fetchLatestBaileysVersion();
@@ -58,7 +58,6 @@ async function startSession(phoneNumber) {
 
         // --- PAIRING SYSTEM ---
         if (text.startsWith("/pair") && !isOwner) {
-            // Generate code
             const code = Math.floor(100000 + Math.random()*900000).toString();
             pendingPairs[code] = from;
             await sock.sendMessage(from, { text: `Your pairing code: ${code}\nSend to owner to approve.` });
@@ -135,4 +134,4 @@ async function startSession(phoneNumber) {
 }
 
 // Start owner session
-startSession(233278104843);
+startSession(OWNER_NUMBER);
