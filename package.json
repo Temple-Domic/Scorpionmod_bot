@@ -1,0 +1,16 @@
+{
+  "name": "scopionmod_bot",
+  "version": "1.0.0",
+  "description": "Full MD WhatsApp Bot like RimusX",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.6.0",
+    "pino": "^8.0.0",
+    "qrcode-terminal": "^0.12.0",
+    "node-fetch": "^3.3.2",
+    "chalk": "^5.2.0"
+  }
+}
